@@ -16,11 +16,11 @@ app.use(cors())
 connectDB();
 
 // api endpoints
-app.use("/api/food",foodRouter)
-app.use("/images",express.static('upload'))
+app.use("/api/food", foodRouter)
+app.use("/images", express.static('upload'))
 
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("API Working")
 })
 
