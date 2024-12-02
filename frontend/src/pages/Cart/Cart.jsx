@@ -2,11 +2,12 @@ import React, { useContext } from 'react'
 import './Cart.css'
 import { StoreContext } from '../../context/StoreContext'
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../utils/formatUtils';
 
 
 const Cart = () => {
 
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } = useContext(StoreContext);
 
   const navigate = useNavigate();
 
@@ -28,11 +29,11 @@ const Cart = () => {
             return (
               <div>
                 <div className='cart-items-title cart-items-item'>
-                  <img src={item.image} alt="" />
+                  <img src={url+"/images/"+item.image} alt="" />
                   <p>{item.name}</p>
-                  <p>{item.price}VND</p>
+                  <p>{formatPrice(item.price)}VND</p>
                   <p>{cartItems[item._id]}</p>
-                  <p>{item.price * cartItems[item._id]}.000VND</p>
+                  <p>{formatPrice(item.price * cartItems[item._id])}VND</p>
                   <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
                 </div>
                 <hr />
@@ -47,17 +48,17 @@ const Cart = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>{getTotalCartAmount()}.000VND</p>
+              <p>{formatPrice(getTotalCartAmount())}VND</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>{getTotalCartAmount()===0?0:2}.000VND</p>
+              <p>{getTotalCartAmount() === 0 ? formatPrice(0) : formatPrice(2000)}VND</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>{getTotalCartAmount()===0?0:getTotalCartAmount() + 2}.000VND</b>
+              <b>{getTotalCartAmount() === 0 ? formatPrice(0) : formatPrice(getTotalCartAmount() + 2000)}VND</b>
             </div>
           </div>
           <button onClick={() => navigate('/order')}>PROCEED TO CHECKOUT</button>

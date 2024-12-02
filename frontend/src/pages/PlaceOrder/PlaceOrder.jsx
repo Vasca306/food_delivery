@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import './PlaceOrder.css'
 import { StoreContext } from '../../context/StoreContext'
+import { formatPrice } from '../../utils/formatUtils';
+
 const PlaceOrder = () => {
 
   const {getTotalCartAmount} = useContext(StoreContext)
@@ -31,17 +33,17 @@ const PlaceOrder = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>{getTotalCartAmount()}.000VND</p>
+              <p>{formatPrice(getTotalCartAmount())}VND</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>{getTotalCartAmount()===0?0:2}.000VND</p>
+              <p>{getTotalCartAmount() === 0 ? formatPrice(0) : formatPrice(2000)}VND</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>{getTotalCartAmount()===0?0:getTotalCartAmount() + 2}.000VND</b>
+              <b>{getTotalCartAmount() === 0 ? formatPrice(0) : formatPrice(getTotalCartAmount() + 2000)}VND</b>
             </div>
           </div>
           <button>PROCEED TO PAYMENT</button>
