@@ -3,6 +3,7 @@ import './MyOrders.css'
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
 import { assets } from '../../assets/assets';
+import { formatPrice } from '../../utils/formatUtils';
 
 const MyOrders = () => {
 
@@ -36,10 +37,10 @@ const MyOrders = () => {
                                 return item.name+" x "+item.quantity+", "
                             }
                         })}</p>
-                        <p>{order.amount}VND</p>
+                        <p>{formatPrice(order.amount)}VND</p>
                         <p>Items: {order.items.length}</p>
                         <p><span>&#x25cf;</span><b>{order.status}</b></p>
-                        <button>Track Order</button>
+                        <button onClick={fetchOrders}>Track Order</button>
                     </div>
                 )
             })}

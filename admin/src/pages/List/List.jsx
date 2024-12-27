@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './List.css'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { formatPrice } from '../../../../frontend/src/utils/formatUtils'
 
 
 const List = ({url}) => {
@@ -50,7 +51,7 @@ const List = ({url}) => {
               <img src={`${url}/images/` + item.image} alt="" />
               <p>{item.name}</p>
               <p>{item.category}</p>
-              <p>{item.price}.000VND</p>
+              <p>{formatPrice(item.price)}VND</p>
               <p onClick={() => removeFood(item._id)} className='cursor'>X</p>
             </div>
           )
