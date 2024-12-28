@@ -36,10 +36,10 @@ const Add = ({url}) => {
                 category: "Salad"
             })
             setImage(false)
-            toast.error(response.data.message)
+            toast.success(response.data.message)
         }
         else {
-            toast.success(response.data.message)
+            toast.error(response.data.message)
         }
     }
 
